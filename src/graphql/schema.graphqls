@@ -1,0 +1,426 @@
+enum Sexe {
+    HOMME
+    FEMME
+    INCONNU
+}
+
+enum AccesTerre {
+    PROPRIETAIRE
+    LOCATAIRE 
+    SANS_TERRE
+    NON_REPONDU
+}
+
+enum Residence {
+    RESIDENT_PERMANENT
+    REFUGIE
+    RETOURNE
+    DEPLACE_INTERNE
+    NON_REPONDU
+}
+
+enum TypeAgriculture {
+    CULTURE_VIVRIERE
+    CULTURE_MARAICHERES
+    LES_DEUX
+    NON_REPONDU
+}
+
+enum ServiceFinaciere {
+    FORMEL
+    INFORMEL
+    PAS_D_ACCES
+    NON_REPONDU
+}
+
+enum Education {
+    EDUCATION_INFORMELLE
+    PRIMAIRE
+    SECONDAIRE
+    UNIVERSITE
+    AUCUN_NIVEAU
+    NON_REPONDU
+}
+
+enum Handicap {
+    NON_HANDICAP
+    HANDICAP_MUET
+    HANDICAP_AVEUGLE
+    HANDICAP_BORNE
+    HANDICAP_SOURD
+    HANDICAP_ALBINOS
+    HANDICAP_MENTAL
+    HANDICAP_NON_SPECIFIE
+}
+
+
+type LocalityTerritoire {
+    id: ID
+    name: String
+}
+
+type LocalityZone {
+    id: ID
+    name: String
+    territoire: LocalityTerritoire
+}
+
+type LocalityAire {
+    id: ID
+    name: String
+    zone: LocalityZone
+}
+
+type LocalityVillage {
+    id: ID
+    name: String
+    aire: LocalityAire
+}
+
+type LocalitySubVillage {
+    id: ID
+    name: String
+    village: LocalityVillage
+}
+
+type StatusMatrimonial {
+    id: ID
+    name: String
+}
+
+type LiaisonChefMenage {
+    id: ID
+    type: String
+}
+
+type Beneficiary {
+    id: ID
+    codeBeneficiary: String
+    firstname: String
+    postname: String
+    lastname: String
+    menage: Menage
+    isHead: Boolean
+    liaisonChefMenage: LiaisonChefMenage
+    contact: String
+    sexe: Sexe
+    isNaissanceKnown: Boolean
+    dateNaissance: String
+    age: Float
+    statusMatrimonial: StatusMatrimonial
+
+    education: Education
+    handicap: Handicap
+    agr: Boolean
+    serviceFinaciere: ServiceFinaciere
+
+    observations: String
+    createdBy: String
+    createdDate: String
+    lastModifiedBy: String
+    lastModifiedDate: String
+    deleted: Boolean
+
+}
+
+type Menage {
+    id: ID
+    codeMenage: String
+    name: String
+    village: LocalityVillage
+    subVillage: LocalitySubVillage
+    chefMenage: Beneficiary
+    address: String
+    Latitude: String
+    Longitude: String
+
+    presenceInfra: Boolean
+    typeAgriculture: TypeAgriculture
+    betail: Boolean
+    organisationAgricole: Boolean
+    residence: Residence
+    accesTerre: AccesTerre
+
+    beneficiaries: [Beneficiary]
+    createdBy: String
+    createdDate: String
+    lastModifiedBy: String
+    lastModifiedDate: String
+    deleted: Boolean
+}
+
+type PendingBeneficiary {
+    id: ID
+    codeBeneficiary: String
+    firstname: String
+    postname: String
+    lastname: String
+    menageId: String
+    isHead: Boolean
+    liaisonChefMenageId: String
+    contact: String
+    sexe: String
+    isNaissanceKnown: Boolean
+    dateNaissance: String
+    age: Float
+    statusMatrimonialId: String
+
+    education: String
+    handicap: String
+    agr: Boolean
+    serviceFinaciere: String
+
+    observations: String
+    createdBy: String
+    createdDate: String
+    lastModifiedBy: String
+    lastModifiedDate: String
+    deleted: Boolean
+    typeOperation: String
+}
+
+type PendingMenage {
+    id: ID
+    codeMenage: String
+    name: String
+    villageId: String
+    subVillageId: String
+    chefMenageId: String
+    address: String
+    Latitude: String
+    Longitude: String
+
+    presenceInfra: Boolean
+    typeAgriculture: String
+    betail: Boolean
+    organisationAgricole: Boolean
+    residence: String
+    accesTerre: String
+
+    createdBy: String
+    createdDate: String
+    lastModifiedBy: String
+    lastModifiedDate: String
+    deleted: Boolean
+    typeOperation: String
+}
+
+type Query {
+    getAllBeneficiaries: [Beneficiary]
+    getBeneficiaryById(id: ID): Beneficiary
+    getAllBeneficiariesByVillage(villageId: ID): [Beneficiary]
+    getAllBeneficiariesByMenage(menageId: ID): [Beneficiary]
+    getAllBeneficiariesByZone(zoneId: ID): [Beneficiary]
+    getAllBeneficiariesByAire(aireId: ID): [Beneficiary]
+    getAllMenages: [Menage]
+    getMenageById(id: ID): Menage
+    getAllLocalityTerritoires: [LocalityTerritoire]
+    getLocalityTerritoireById(id: ID): LocalityTerritoire
+    getAllLocalityZones: [LocalityZone]
+    getLocalityZoneById(id: ID): LocalityZone
+    getAllLocalityAires: [LocalityAire]
+    getLocalityAireById(id: ID): LocalityAire
+    getAllLocalityVillages: [LocalityVillage]
+    getLocalityVillageById(id: ID): LocalityVillage
+    getAllStatusMatrimonials: [StatusMatrimonial]
+    getStatusMatrimonialById(id: ID): StatusMatrimonial
+    getAllLiaisonChefMenages: [LiaisonChefMenage]
+    getLiaisonChefMenageById(id: ID): LiaisonChefMenage
+
+    getAllLocalitySubVillages: [LocalitySubVillage]
+    getLocalitySubVillageById(id: ID): LocalitySubVillage
+}
+
+type Mutation {
+    createBeneficiary(input: BeneficiaryInput): Beneficiary
+    updateBeneficiary(id: ID, input: BeneficiaryInput): Beneficiary
+    deleteBeneficiary(id: ID): Boolean
+
+    createMenage(input: MenageInput): Menage
+    updateMenage(id: ID, input: MenageInput): Menage
+    deleteMenage(id: ID): Boolean
+
+    createLocalityTerritoire(input: LocalityTerritoireInput): LocalityTerritoire
+    updateLocalityTerritoire(id: ID, input: LocalityTerritoireInput): LocalityTerritoire
+    deleteLocalityTerritoire(id: ID): Boolean
+
+    createLocalityZone(input: LocalityZoneInput): LocalityZone
+    updateLocalityZone(id: ID, input: LocalityZoneInput): LocalityZone
+    deleteLocalityZone(id: ID): Boolean
+
+    createLocalityAire(input: LocalityAireInput): LocalityAire
+    updateLocalityAire(id: ID, input: LocalityAireInput): LocalityAire
+    deleteLocalityAire(id: ID): Boolean
+
+    createLocalityVillage(input: LocalityVillageInput): LocalityVillage
+    updateLocalityVillage(id: ID, input: LocalityVillageInput): LocalityVillage
+    deleteLocalityVillage(id: ID): Boolean
+
+    
+    createLocalitySubVillage(input: LocalitySubVillageInput): LocalitySubVillage
+    updateLocalitySubVillage(id: ID, input: LocalitySubVillageInput): LocalitySubVillage
+    deleteLocalitySubVillage(id: ID): Boolean
+
+    createStatusMatrimonial(input: StatusMatrimonialInput): StatusMatrimonial
+    updateStatusMatrimonial(id: ID, input: StatusMatrimonialInput): StatusMatrimonial
+    deleteStatusMatrimonial(id: ID): Boolean
+
+    createLiaisonChefMenage(input: LiaisonChefMenageInput): LiaisonChefMenage
+    updateLiaisonChefMenage(id: ID, input: LiaisonChefMenageInput): LiaisonChefMenage
+    deleteLiaisonChefMenage(id: ID): Boolean
+
+    createPendingBeneficiary(input: PendingBeneficiaryInput): PendingBeneficiary
+    updatePendingBeneficiary(id: ID, input: PendingBeneficiaryInput): PendingBeneficiary
+    deletePendingBeneficiary(id: ID): Boolean
+    validateBeneficiary(id: ID): Beneficiary
+
+    createPendingMenage(input: PendingMenageInput): PendingMenage
+    updatePendingMenage(id: ID, input: PendingMenageInput): PendingMenage
+    deletePendingMenage(id: ID): Boolean
+    validateMenage(id: ID): Menage
+
+}
+
+input BeneficiaryInput {
+    id: String
+    codeBeneficiary: String
+    firstname: String
+    postname: String
+    lastname: String
+    menageId: ID
+    isHead: Boolean
+    liaisonChefMenageId: ID
+    contact: String
+    sexe: Sexe
+    isNaissanceKnown: Boolean
+    dateNaissance: String
+    age: Float
+    statusMatrimonialId: ID
+
+    education: String
+    handicap: String
+    agr: Boolean
+    serviceFinaciere: String
+
+    observations: String
+
+    createdDate: String
+    lastModifiedDate: String
+    createdBy: String
+    lastModifiedBy: String
+    deleted: Boolean
+}
+
+input MenageInput {
+    id: String
+    codeMenage: String
+    name: String
+    villageId: ID
+    subVillageId: ID
+    chefMenageId: ID
+    address: String
+    Latitude: String
+    Longitude: String
+
+    presenceInfra: Boolean
+    typeAgriculture: String
+    betail: Boolean
+    organisationAgricole: Boolean
+    residence: String
+    accesTerre: String
+
+    createdDate: String
+    lastModifiedDate: String
+    createdBy: String
+    lastModifiedBy: String
+    deleted: Boolean
+}
+
+input PendingBeneficiaryInput {
+    id: String
+    codeBeneficiary: String
+    firstname: String
+    postname: String
+    lastname: String
+    menageId: ID
+    isHead: Boolean
+    liaisonChefMenageId: ID
+    contact: String
+    sexe: Sexe
+    isNaissanceKnown: Boolean
+    dateNaissance: String
+    age: Float
+    statusMatrimonialId: ID
+
+    education: String
+    handicap: String
+    agr: Boolean
+    serviceFinaciere: String
+
+    observations: String
+
+    createdDate: String
+    lastModifiedDate: String
+    createdBy: String
+    lastModifiedBy: String
+    deleted: Boolean
+    typeOperation: String
+}
+
+input PendingMenageInput {
+    id: String
+    codeMenage: String
+    name: String
+    villageId: ID
+    subVillageId: ID
+    chefMenageId: ID
+    address: String
+    Latitude: String
+    Longitude: String
+
+    presenceInfra: Boolean
+    typeAgriculture: String
+    betail: Boolean
+    organisationAgricole: Boolean
+    residence: String
+    accesTerre: String
+
+    createdDate: String
+    lastModifiedDate: String
+    createdBy: String
+    lastModifiedBy: String
+    deleted: Boolean
+    typeOperation: String
+}
+
+input LocalityTerritoireInput {
+    name: String
+}
+
+input LocalityZoneInput {
+    name: String
+    territoireId: ID
+}
+
+input LocalityAireInput {
+    name: String
+    zoneId: ID
+}
+
+input LocalityVillageInput {
+    name: String
+    aireId: ID
+}
+
+input LocalitySubVillageInput {
+    name: String
+    aireId: ID
+}
+
+input StatusMatrimonialInput {
+    name: String
+}
+
+input LiaisonChefMenageInput {
+    type: String
+}

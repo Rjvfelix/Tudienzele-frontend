@@ -1,0 +1,39 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Liste des bénéficiaires</h4>
+            <p class="card-category">Liste récupérée depuis l'API GraphQL</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <tr>
+                    <th>ID</th>
+                    <th>Prénom</th>
+                    <th>Post-nom</th>
+                    <th>Nom</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let b of beneficiaries">
+                    <td>{{ b.id }}</td>
+                    <td>{{ b.firstname }}</td>
+                    <td>{{ b.postname }}</td>
+                    <td>{{ b.lastname }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="loading">Chargement...</div>
+              <div *ngIf="error">Erreur : {{ error.message }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
