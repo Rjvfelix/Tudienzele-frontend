@@ -6,7 +6,7 @@ enum Sexe {
 
 enum AccesTerre {
     PROPRIETAIRE
-    LOCATAIRE 
+    LOCATAIRE
     SANS_TERRE
     NON_REPONDU
 }
@@ -205,6 +205,18 @@ type PendingMenage {
     typeOperation: String
 }
 
+type PageBeneficiary {
+    content: [Beneficiary]
+    totalElements: Int
+    totalPages: Int
+}
+
+type PageMenage {
+    content: [Menage]
+    totalElements: Int
+    totalPages: Int
+}
+
 type Query {
     getAllBeneficiaries: [Beneficiary]
     getBeneficiaryById(id: ID): Beneficiary
@@ -227,8 +239,11 @@ type Query {
     getAllLiaisonChefMenages: [LiaisonChefMenage]
     getLiaisonChefMenageById(id: ID): LiaisonChefMenage
 
+
     getAllLocalitySubVillages: [LocalitySubVillage]
     getLocalitySubVillageById(id: ID): LocalitySubVillage
+    getBeneficiariesPaginated(page: Int, size: Int): PageBeneficiary
+    getMenagesPaginated(page: Int, size: Int): PageMenage
 }
 
 type Mutation {
@@ -256,7 +271,7 @@ type Mutation {
     updateLocalityVillage(id: ID, input: LocalityVillageInput): LocalityVillage
     deleteLocalityVillage(id: ID): Boolean
 
-    
+
     createLocalitySubVillage(input: LocalitySubVillageInput): LocalitySubVillage
     updateLocalitySubVillage(id: ID, input: LocalitySubVillageInput): LocalitySubVillage
     deleteLocalitySubVillage(id: ID): Boolean

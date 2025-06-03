@@ -33,7 +33,7 @@ import { InMemoryCache } from '@apollo/client/core';
       useFactory: (httpLink: HttpLink) => {
         return {
           cache: new InMemoryCache(),
-          link: httpLink.create({ uri: 'http://10.107.0.134:8090/graphql' }),
+          link: httpLink.create({ uri: 'http://10.107.0.123:8090/graphql' }),
         };
       },
       deps: [HttpLink],

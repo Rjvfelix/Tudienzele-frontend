@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
 @Component({
-  selector: 'app-master-list',
-  templateUrl: './master-list.component.html',
-  styleUrls: ['./master-list.component.css']
+  selector: 'app-menage-list',
+  templateUrl: './menage-list.component.html',
+  styleUrls: ['./menage-list.component.css']
 })
-export class MasterListComponent implements OnInit {
-  beneficiaries: any[] = [];
+export class MenageListComponent implements OnInit {
+  menages: any[] = [];
   loading = true;
   error: any;
   page = 0;
-  size = 20;
+  size = 10;
   totalPages = 1;
   isLoadingMore = false;
 
@@ -26,14 +26,12 @@ export class MasterListComponent implements OnInit {
     this.isLoadingMore = true;
     this.apollo.query<any>({
       query: gql`
-        query GetBeneficiariesPaginated($page: Int!, $size: Int!) {
-          getBeneficiariesPaginated(page: $page, size: $size) {
+        query GetMenagesPaginated($page: Int!, $size: Int!) {
+          getMenagesPaginated(page: $page, size: $size) {
             content {
               id
-              firstname
-              postname
-              lastname
-              codeBeneficiary
+              name
+              codeMenage
             }
             totalElements
             totalPages
@@ -44,11 +42,11 @@ export class MasterListComponent implements OnInit {
       fetchPolicy: 'network-only'
     }).subscribe({
       next: ({ data }) => {
-        const result = data.getBeneficiariesPaginated;
+        const result = data.getMenagesPaginated;
         if (page === 0) {
-          this.beneficiaries = result.content;
+          this.menages = result.content;
         } else {
-          this.beneficiaries = [...this.beneficiaries, ...result.content];
+          this.menages = [...this.menages, ...result.content];
         }
         this.totalPages = result.totalPages;
         this.page = page;
@@ -76,3 +74,4 @@ export class MasterListComponent implements OnInit {
     }
   }
 }
+
