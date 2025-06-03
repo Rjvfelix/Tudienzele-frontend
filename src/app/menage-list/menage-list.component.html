@@ -8,25 +8,45 @@
             <p class="card-category">Liste paginée depuis l'API GraphQL</p>
           </div>
           <div class="card-body">
-            <div class="table-responsive" (scroll)="handleTableScroll($event)" style="max-height: 500px; overflow-y: auto;">
+            <div class="table-responsive" (scroll)="handleTableScroll($event)" style="max-height: calc(90vh - 220px); overflow-y: auto;">
               <table class="table">
                 <thead class="text-primary">
                   <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
                     <th>Code Ménage</th>
+                    <th>Nom</th>
+                    <th>Village</th>
+                    <th>Sous-village</th>
+                    <th>Chef Ménage</th>
+                    <th>Adresse</th>
+                    <th>Résidence</th>
+                    <th>Date création</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let m of menages">
-                    <td>{{ m.id }}</td>
-                    <td>{{ m.name }}</td>
                     <td>{{ m.codeMenage }}</td>
+                    <td>{{ m.name }}</td>
+                    <td>{{ m.village?.name }}</td>
+                    <td>{{ m.subVillage?.name }}</td>
+                    <td>{{ m.chefMenage?.firstname }} {{ m.chefMenage?.postname }} {{ m.chefMenage?.lastname }}</td>
+                    <td>{{ m.address }}</td>
+                    <td>{{ m.residence }}</td>
+                    <td>{{ m.createdDate | date:'short' }}</td>
+                    <td style="text-align:center; min-width:110px;">
+                      <button mat-icon-button color="primary" matTooltip="Éditer" (click)="onEdit(m)">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" matTooltip="Supprimer" (click)="onDelete(m)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <button mat-icon-button color="accent" matTooltip="Voir le détail" (click)="onView(m)">
+                        <mat-icon>visibility</mat-icon>
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
-              <div *ngIf="loading">Chargement...</div>
-              <div *ngIf="error">Erreur : {{ error.message }}</div>
             </div>
           </div>
         </div>
@@ -34,4 +54,3 @@
     </div>
   </div>
 </div>
-

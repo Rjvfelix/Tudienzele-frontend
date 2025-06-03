@@ -12,12 +12,14 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { MenageListComponent } from '../../menage-list/menage-list.component';
+import { BeneficiaryProfileComponent } from '../../master-list/beneficiary-profile.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   imports: [
@@ -31,6 +33,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    MatIconModule,
   ],
   declarations: [
     DashboardComponent,
@@ -42,6 +45,7 @@ import {MatSelectModule} from '@angular/material/select';
     NotificationsComponent,
     UpgradeComponent,
     MenageListComponent,
+    BeneficiaryProfileComponent,
   ]
 })
 export class AdminLayoutModule {}

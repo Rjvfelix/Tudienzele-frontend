@@ -1,0 +1,68 @@
+/* Fixe la navbar en haut */
+.fixed-navbar {
+  position: fixed;
+  top: 0;
+  left: 260px; /* largeur de la sidebar */
+  right: 0;
+  z-index: 1001;
+  width: calc(100% - 260px);
+}
+
+/* Fixe le footer en bas */
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 260px; /* largeur de la sidebar */
+  right: 0;
+  z-index: 1001;
+  width: calc(100% - 260px);
+}
+
+/* Le contenu principal scrollable entre navbar et footer */
+.main-content-scrollable {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  margin-top: 70px; /* hauteur de la navbar */
+  margin-bottom: 60px; /* hauteur du footer */
+  height: auto;
+  min-height: 0;
+  margin-left: 260px; /* largeur de la sidebar */
+}
+
+/* Ajuste la taille de main-panel pour prendre tout l'écran sans dépasser */
+.main-panel {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.wrapper, .main-panel {
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+/* S'assure que le body et html prennent toute la hauteur */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 991px) {
+  .fixed-navbar, .fixed-footer, .main-content-scrollable {
+    left: 0;
+    width: 100%;
+    margin-left: 0;
+  }
+  .main-content-scrollable {
+    margin-top: 70px;
+    margin-bottom: 60px;
+  }
+}

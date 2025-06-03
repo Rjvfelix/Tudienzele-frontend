@@ -8,9 +8,13 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { MasterListComponent } from './master-list/master-list.component';
+import { BeneficiaryProfileComponent } from './master-list/beneficiary-profile.component';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   imports: [
@@ -21,6 +25,9 @@ import { InMemoryCache } from '@apollo/client/core';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
   ],
   declarations: [
     AppComponent,

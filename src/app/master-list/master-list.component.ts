@@ -14,6 +14,7 @@ export class MasterListComponent implements OnInit {
   size = 20;
   totalPages = 1;
   isLoadingMore = false;
+  selectedBeneficiary: any = null;
 
   constructor(private apollo: Apollo) {}
 
@@ -71,8 +72,27 @@ export class MasterListComponent implements OnInit {
 
   handleTableScroll(event: any) {
     const element = event.target;
-    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+    // Correction de la détection du bas du scroll (plus tolérante)
+    if (element.scrollTop + element.clientHeight >= element.scrollHeight - 2) {
       this.onScroll();
     }
+  }
+
+  onEdit(beneficiary: any) {
+    // TODO: ouvrir le formulaire d'édition du bénéficiaire
+    console.log('Edit beneficiary', beneficiary);
+  }
+
+  onDelete(beneficiary: any) {
+    // TODO: afficher une confirmation et supprimer le bénéficiaire
+    console.log('Delete beneficiary', beneficiary);
+  }
+
+  onView(beneficiary: any) {
+    this.selectedBeneficiary = beneficiary;
+  }
+
+  closeProfileModal() {
+    this.selectedBeneficiary = null;
   }
 }

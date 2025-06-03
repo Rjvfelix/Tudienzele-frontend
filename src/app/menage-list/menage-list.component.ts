@@ -11,7 +11,7 @@ export class MenageListComponent implements OnInit {
   loading = true;
   error: any;
   page = 0;
-  size = 10;
+  size = 20;
   totalPages = 1;
   isLoadingMore = false;
 
@@ -30,8 +30,24 @@ export class MenageListComponent implements OnInit {
           getMenagesPaginated(page: $page, size: $size) {
             content {
               id
-              name
               codeMenage
+              name
+              village { id name }
+              subVillage { id name }
+              chefMenage { id firstname lastname }
+              address
+              Latitude
+              Longitude
+              presenceInfra
+              typeAgriculture
+              betail
+              organisationAgricole
+              residence
+              accesTerre
+              createdBy
+              createdDate
+              lastModifiedBy
+              lastModifiedDate
             }
             totalElements
             totalPages
@@ -69,7 +85,8 @@ export class MenageListComponent implements OnInit {
 
   handleTableScroll(event: any) {
     const element = event.target;
-    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+    // Correction de la détection du bas du scroll (plus tolérante)
+    if (element.scrollTop + element.clientHeight >= element.scrollHeight - 2) {
       this.onScroll();
     }
   }

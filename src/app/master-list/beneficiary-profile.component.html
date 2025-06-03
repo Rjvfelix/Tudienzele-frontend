@@ -1,0 +1,12 @@
+<div *ngIf="beneficiary" class="beneficiary-profile">
+  <h3>Détail du bénéficiaire</h3>
+  <table class="table table-bordered">
+    <tr><th>ID</th><td>{{ beneficiary.id }}</td></tr>
+    <tr><th>Prénom</th><td>{{ beneficiary.firstname }}</td></tr>
+    <tr><th>Post-nom</th><td>{{ beneficiary.postname }}</td></tr>
+    <tr><th>Nom</th><td>{{ beneficiary.lastname }}</td></tr>
+    <tr><th>Code</th><td>{{ beneficiary.codeBeneficiary }}</td></tr>
+    <!-- Ajoute ici d'autres champs si besoin -->
+  </table>
+</div>
+
