@@ -35,6 +35,9 @@ import {MatIconModule} from "@angular/material/icon";
     MatTooltipModule,
     MatIconModule,
   ],
+  exports: [
+    BeneficiaryProfileComponent
+  ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,

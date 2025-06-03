@@ -8,13 +8,13 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { MasterListComponent } from './master-list/master-list.component';
-import { BeneficiaryProfileComponent } from './master-list/beneficiary-profile.component';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {AdminLayoutModule} from "./layouts/admin-layout/admin-layout.module";
 
 @NgModule({
   imports: [
@@ -28,6 +28,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    AdminLayoutModule,
   ],
   declarations: [
     AppComponent,
@@ -40,7 +41,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
       useFactory: (httpLink: HttpLink) => {
         return {
           cache: new InMemoryCache(),
-          link: httpLink.create({ uri: 'http://10.107.0.123:8090/graphql' }),
+          link: httpLink.create({ uri: 'http://localhost:8090/graphql' }),
         };
       },
       deps: [HttpLink],
