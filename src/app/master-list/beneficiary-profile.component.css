@@ -3,7 +3,7 @@
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
 }
 .beneficiary-profile h3 {
@@ -11,13 +11,16 @@
 }
 .beneficiary-profile table {
   width: 100%;
+  font-size: 15px;
 }
 .beneficiary-profile th {
   width: 40%;
   text-align: left;
   background: #f7f7f7;
+  font-weight: 500;
 }
 .beneficiary-profile td {
   width: 60%;
+  word-break: break-word;
 }
 

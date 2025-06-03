@@ -2,11 +2,35 @@
   <h3>Détail du bénéficiaire</h3>
   <table class="table table-bordered">
     <tr><th>ID</th><td>{{ beneficiary.id }}</td></tr>
+    <tr><th>Code</th><td>{{ beneficiary.codeBeneficiary }}</td></tr>
     <tr><th>Prénom</th><td>{{ beneficiary.firstname }}</td></tr>
     <tr><th>Post-nom</th><td>{{ beneficiary.postname }}</td></tr>
     <tr><th>Nom</th><td>{{ beneficiary.lastname }}</td></tr>
-    <tr><th>Code</th><td>{{ beneficiary.codeBeneficiary }}</td></tr>
-    <!-- Ajoute ici d'autres champs si besoin -->
+    <tr *ngIf="beneficiary.menage"><th>Ménage</th><td>{{ beneficiary.menage?.codeMenage || beneficiary.menage?.id }}</td></tr>
+    <tr *ngIf="beneficiary.isHead !== undefined"><th>Chef de ménage ?</th><td>{{ beneficiary.isHead ? 'Oui' : 'Non' }}</td></tr>
+    <tr *ngIf="beneficiary.liaisonChefMenage"><th>Liaison Chef Ménage</th><td>{{ beneficiary.liaisonChefMenage?.libelle || beneficiary.liaisonChefMenage?.id }}</td></tr>
+    <tr *ngIf="beneficiary.contact"><th>Contact</th><td>{{ beneficiary.contact }}</td></tr>
+    <tr *ngIf="beneficiary.sexe"><th>Sexe</th><td>{{ beneficiary.sexe }}</td></tr>
+    <tr *ngIf="beneficiary.isNaissanceKnown !== undefined"><th>Date naissance connue ?</th><td>{{ beneficiary.isNaissanceKnown ? 'Oui' : 'Non' }}</td></tr>
+    <tr *ngIf="beneficiary.dateNaissance"><th>Date de naissance</th><td>{{ beneficiary.dateNaissance | date:'longDate' }}</td></tr>
+    <tr *ngIf="beneficiary.age"><th>Âge</th><td>{{ beneficiary.age }}</td></tr>
+    <tr *ngIf="beneficiary.statusMatrimonial"><th>Status matrimonial</th><td>{{ beneficiary.statusMatrimonial?.libelle || beneficiary.statusMatrimonial?.id }}</td></tr>
+    <tr *ngIf="beneficiary.education"><th>Niveau d'éducation</th><td>{{ beneficiary.education }}</td></tr>
+    <tr *ngIf="beneficiary.handicap"><th>Handicap</th><td>{{ beneficiary.handicap }}</td></tr>
+    <tr *ngIf="beneficiary.agr !== undefined"><th>Agriculteur ?</th><td>{{ beneficiary.agr ? 'Oui' : 'Non' }}</td></tr>
+    <tr *ngIf="beneficiary.serviceFinaciere"><th>Service Financier</th><td>{{ beneficiary.serviceFinaciere }}</td></tr>
+    <tr *ngIf="beneficiary.observations"><th>Observations</th><td>{{ beneficiary.observations }}</td></tr>
+    <tr *ngIf="beneficiary.logaltoCode"><th>Code LogAlto</th><td>{{ beneficiary.logaltoCode }}</td></tr>
+    <tr *ngIf="beneficiary.createdBy"><th>Créé par</th><td>{{ beneficiary.createdBy }}</td></tr>
+    <tr *ngIf="beneficiary.createdDate"><th>Date création</th><td>{{ beneficiary.createdDate | date:'short' }}</td></tr>
+    <tr *ngIf="beneficiary.lastModifiedBy"><th>Modifié par</th><td>{{ beneficiary.lastModifiedBy }}</td></tr>
+    <tr *ngIf="beneficiary.lastModifiedDate"><th>Date modification</th><td>{{ beneficiary.lastModifiedDate | date:'short' }}</td></tr>
+    <tr *ngIf="beneficiary.deleted !== undefined"><th>Supprimé</th><td>{{ beneficiary.deleted ? 'Oui' : 'Non' }}</td></tr>
+    <tr *ngIf="beneficiary.synced !== undefined"><th>Synchronisé</th><td>{{ beneficiary.synced ? 'Oui' : 'Non' }}</td></tr>
+    <tr *ngFor="let key of getOtherKeys(beneficiary)">
+      <th>{{ key }}</th>
+      <td>{{ beneficiary[key] }}</td>
+    </tr>
   </table>
 </div>
 
